@@ -1,40 +1,124 @@
-![GitHub](https://img.shields.io/github/license/seu-usuario/cardcast)
+# **CardCast - Seu Oráculo Digital Diário** 🔮✨
 
+---
 
+## **📌 Sobre o Projeto**
+O **CardCast** é uma plataforma de tarô digital que oferece:
+- Leituras diárias personalizadas
+- Interpretações geradas por IA
+- Experiência mística moderna
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Tecnologias Utilizadas**:
+- Next.js (App Router)
+- Supabase (Banco de dados)
+- hCaptcha (Proteção contra bots)
+- Resend (Envios de e-mail)
+- Tailwind CSS (Estilização)
 
-## Getting Started
+---
 
-First, run the development server:
+## **🚀 Como Rodar Localmente**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### **Pré-requisitos**
+- Node.js 18+
+- Conta no [Supabase](https://supabase.com/)
+- Chaves do [hCaptcha](https://dashboard.hcaptcha.com/) (opcional)
+- Conta no [Resend](https://resend.com/) (opcional para e-mails)
+
+---
+
+### **🔧 Configuração Inicial**
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/cardcast.git
+   cd cardcast
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Configure as variáveis de ambiente**  
+   Crie um arquivo `.env.local` na raiz do projeto:
+   ```env
+   # Supabase
+   SUPABASE_URL=seu-url-supabase
+   SUPABASE_KEY=seu-key-supabase
+
+   # hCaptcha (opcional)
+   NEXT_PUBLIC_HCAPTCHA_SITE_KEY=sua-chave-publica
+   HCAPTCHA_SECRET=sua-chave-privada
+
+   # Resend (opcional para e-mails)
+   RESEND_API_KEY=sua-chave-resend
+   NEXTAUTH_URL=http://localhost:3000
+   ```
+
+---
+
+### **🖥️ Comandos Úteis**
+
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Gera a versão de produção |
+| `npm start` | Roda a versão buildada |
+| `npm run lint` | Verifica erros de código |
+
+---
+
+## **🌐 Acessando o Projeto**
+Após iniciar o servidor, acesse:
+```
+http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## **📦 Estrutura do Projeto**
+```
+cardcast/
+├── app/
+│   ├── (auth)/
+│   ├── api/
+│   ├── components/
+│   └── page.jsx         # Página principal
+├── lib/
+│   └── supabase.js      # Conexão com o banco
+├── public/              # Assets estáticos
+└── styles/
+    └── globals.css      # Estilos globais
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## **🔒 Variáveis de Ambiente Obrigatórias**
+| Variável | Descrição | Obrigatória? |
+|----------|-----------|--------------|
+| `SUPABASE_URL` | URL do projeto Supabase | ✅ |
+| `SUPABASE_KEY` | Chave anônima do Supabase | ✅ |
+| `NEXTAUTH_URL` | URL base da aplicação | ✅ |
+| `NEXT_PUBLIC_HCAPTCHA_SITE_KEY` | Chave pública hCaptcha | ❌ |
+| `HCAPTCHA_SECRET` | Chave privada hCaptcha | ❌ |
+| `RESEND_API_KEY` | Chave da API Resend | ❌ |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## **🤝 Como Contribuir**
+1. Faça um fork do projeto
+2. Crie uma branch (`git checkout -b feature/nova-feature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/nova-feature`)
+5. Abra um Pull Request
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## **📄 Licença**
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**✨ Desenvolvido com magia e código**  
+Rodrigo Bravo • 2025
