@@ -1,7 +1,8 @@
 'use client'
-import { useState, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useRef, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
+import { signIn } from '@/lib/supabase'
 
 export default function Home() {
   const [email, setEmail] = useState('')
@@ -10,6 +11,17 @@ export default function Home() {
   const [captchaToken, setCaptchaToken] = useState(null)
   const captchaRef = useRef(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    // Verifica se há erro na URL
+    const errorType = searchParams.get('error')
+    const errorMessage = searchParams.get('message')
+    
+    if (errorType === 'auth') {
+      setError(errorMessage || 'Houve um erro durante a autenticação. Por favor, tente novamente.')
+    }
+  }, [searchParams])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -30,30 +42,18 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          email,
-          captcha: captchaToken 
-        }),
-      })
-
-      const result = await response.json()
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Erro desconhecido')
+      // Verifica o captcha
+      if (process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY && !captchaToken) {
+        setError('Por favor, complete o captcha')
+        setIsSubmitting(false)
+        return
       }
 
-      // Redirecionamento
-      if (result.data?.requires_confirmation) {
-        router.push('/confirmacao')
-      } else {
-        router.push('/dashboard')
-      }
+      // Envia link mágico de login
+      await signIn(email)
 
+      // Redireciona para página de confirmação
+      router.push('/confirmacao')
     } catch (error) {
       console.error('Erro no cadastro:', error)
       setError(error.message)

@@ -10,6 +10,21 @@ const nextConfig = {
   },
   // Para static exports (se for usar):
   output: 'standalone',
+  async redirects() {
+    return [
+      {
+        source: '/auth/callback',
+        has: [
+          {
+            type: 'query',
+            key: 'error_description'
+          }
+        ],
+        destination: '/?error=auth&message=:error_description',
+        permanent: false
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig
